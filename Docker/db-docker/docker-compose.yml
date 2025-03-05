@@ -1,0 +1,37 @@
+services:
+  db_parcialeam:
+    build:
+      context: ./mysql
+      dockerfile: Dockerfile
+    container_name: database_parcial1_eam
+    restart: always
+    ports:
+      - 4500:3306
+    volumes:
+      - ./Config:/mysql:/var/lib/mysql
+    hostname: app_database
+    networks:
+      - eam_network
+    healthcheck:
+      test: ["CMD", "mysql" , "-u", "root", "-proot_12345678"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  admainer_db_parcialeam:
+    image: adminer
+    container_name: adminer_database_parcial1_eam
+    restart: always
+    ports:
+      - 8081:8080
+    networks:
+      - eam_network
+    depends_on:
+      db_parcialeam:
+        condition: service_healthy
+    
+networks:
+    eam_network:
+      driver: bridge
+     
