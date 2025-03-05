@@ -1,0 +1,15 @@
+The dependencies you need to use are:
+	1.	FastAPI – The framework to create the API.
+	2.	Uvicorn – The ASGI server to run the application.
+
+To install the dependencies, you can use the following command:
+pip install FastAPI
+pip install uvicorn
+
+for running the server:
+uvicorn main:app --reload 
+
+
+
+
+
